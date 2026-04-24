@@ -36,11 +36,11 @@ function validate() {
 async function addData() {
   const error = validate();
   if (error) {
-    errorMsg.innerText = error;
+    alert(error);
     return;
   }
 
-  errorMsg.innerText = "";
+  
 
   try {
     await db.createDocument(DB_ID, COL_ID, ID.unique(), {
