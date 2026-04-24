@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #111827;
+      color: white;
+      padding: 20px;
+    }
+
+    .login-box {
+      max-width: 300px;
+      margin: auto;
+      text-align: center;
+    }
+
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      width: 100%;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #444;
+      text-align: center;
+    }
+
+    th {
+      background: #2563eb;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="login-box" id="loginBox">
+  <h3>Admin Login</h3>
+  <input type="password" id="adminPass" placeholder="Enter Password">
+  <button onclick="login()">Login</button>
+</div>
+
+<div id="adminPanel" style="display:none;">
+  <h2>Admin Panel</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Flat</th>
+        <th>Name</th>
+        <th>Amount</th>
+        <th>Month</th>
+        <th>Year</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="dataTable"></tbody>
+  </table>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/appwrite@13.0.0"></script>
+<script src="app.js"></script>
+
+<script>
+let isAdmin = false;
+
+function login(){
+  if(document.getElementById("adminPass").value === "12345"){
+    isAdmin = true;
+    document.getElementById("loginBox").style.display = "none";
+    document.getElementById("adminPanel").style.display = "block";
+    loadData();
+  } else {
+    alert("Wrong Password");
+  }
+}
+
+// override table rendering for admin
+async function loadData(){
+  const res = await db.listDocuments(DB_ID, COL_ID);
+
+  let html = "";
+  res.documents.forEach(d=>{
+    html += `<tr>
+      <td>${d.flatNo}</td>
+      <td>${d.name}</td>
+      <td>${d.amount}</td>
+      <td>${d.month}</td>
+      <td>${d.year}</td>
+      <td><button onclick="deleteData('${d.$id}')">Delete</button></td>
+    </tr>`;
+  });
+
+  dataTable.innerHTML = html;
+}
+
+// delete
+async function deleteData(id){
+  if(confirm("Delete this record?")){
+    await db.deleteDocument(DB_ID, COL_ID, id);
+    loadData();
+  }
+}
+</script>
+
+</body>
+</html>
