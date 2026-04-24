@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tenant Tracker</title>
+
+  <style>
+    body {
+      font-family: 'Segoe UI';
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #333;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    h2, h3 {
+      text-align: center;
+    }
+
+    input {
+      padding: 10px;
+      margin: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      width: 18%;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: none;
+      background: #667eea;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #5a67d8;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+    }
+
+    th {
+      background: #667eea;
+      color: white;
+      padding: 10px;
+    }
+
+    td {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+    }
+
+    .error {
+      color: red;
+      text-align: center;
+    }
+  </style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h2>🏢 Tenant Maintenance Tracker</h2>
+
+<h3>Add Payment</h3>
+
+<input type="text" id="flat" placeholder="Flat No">
+<input type="text" id="name" placeholder="Name">
+<input type="number" id="amount" placeholder="Amount">
+<input type="text" id="month" placeholder="Month">
+<input type="number" id="year" placeholder="Year">
+<button onclick="addData()">Add</button>
+
+<p class="error" id="errorMsg"></p>
+
+<h3>Filter</h3>
+<input type="text" id="filterMonth" placeholder="Month">
+<input type="number" id="filterYear" placeholder="Year">
+<button onclick="loadData()">Filter</button>
+
+<table>
+  <thead>
+    <tr>
+      <th>Flat</th>
+      <th>Name</th>
+      <th>Amount</th>
+      <th>Month</th>
+      <th>Year</th>
+    </tr>
+  </thead>
+  <tbody id="dataTable"></tbody>
+</table>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/appwrite@13.0.0"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
