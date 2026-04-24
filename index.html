@@ -124,32 +124,38 @@
 
 <!-- ADD -->
 <div class="card">
-  <h3>Add Payment</h3>
-  <div class="form-row">
+
+  <h3>Manage Payments</h3>
+
+  <!-- ADD ROW -->
+  <div class="form-row add-row">
     <input id="flat" placeholder="Flat">
     <input id="name" placeholder="Name">
     <input id="amount" type="number" placeholder="Amount">
-    <input id="month" placeholder="Month">
+
+    <select id="month">
+      <option value="">Month</option>
+      <option>Jan</option><option>Feb</option><option>Mar</option>
+      <option>Apr</option><option>May</option><option>Jun</option>
+      <option>Jul</option><option>Aug</option><option>Sep</option>
+      <option>Oct</option><option>Nov</option><option>Dec</option>
+    </select>
+
     <input id="year" type="number" placeholder="Year">
+
     <button onclick="addData()">Add</button>
   </div>
-</div>
 
-<!-- FILTER -->
-<div class="card">
-  <h3>Filter</h3>
-  <div class="form-row">
-    <input id="filterMonth" placeholder="Month">
-    <input id="filterYear" placeholder="Year">
-    <button class="secondary" onclick="loadData()">Apply</button>
+  <!-- FILTER ROW -->
+  <div class="form-row filter-row">
+    <input id="filterMonth" placeholder="Filter Month">
+    <input id="filterYear" placeholder="Filter Year">
+
+    <button class="secondary" onclick="loadData()">Filter</button>
   </div>
+
 </div>
 
-<!-- SUMMARY -->
-<div class="card">
-  <h3>Flat-wise Summary</h3>
-  <div id="summary"></div>
-</div>
 
 <!-- TABLE -->
 <div class="card">

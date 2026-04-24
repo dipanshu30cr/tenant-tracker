@@ -91,16 +91,33 @@ async function loadData(){
   let html = "";
   res.documents.forEach(d=>{
     html += `<tr>
-      <td>${d.flatNo}</td>
-      <td>${d.name}</td>
-      <td>${d.amount}</td>
-      <td>${d.month}</td>
-      <td>${d.year}</td>
-      <td><button onclick="deleteData('${d.$id}')">Delete</button></td>
-    </tr>`;
+        <td><input value="${d.flatNo}" id="flat_${d.$id}"></td>
+        <td><input value="${d.name}" id="name_${d.$id}"></td>
+        <td><input value="${d.amount}" id="amount_${d.$id}"></td>
+        <td><input value="${d.month}" id="month_${d.$id}"></td>
+        <td><input value="${d.year}" id="year_${d.$id}"></td>
+        <td>
+            <button onclick="updateData('${d.$id}')">Update</button>
+            <button onclick="deleteData('${d.$id}')">Delete</button>
+        </td>
+        </tr>`;
   });
 
   dataTable.innerHTML = html;
+}
+
+
+async function updateData(id){
+  await db.updateDocument(DB_ID, COL_ID, id, {
+    flatNo: document.getElementById(`flat_${id}`).value,
+    name: document.getElementById(`name_${id}`).value,
+    amount: document.getElementById(`amount_${id}`).value,
+    month: document.getElementById(`month_${id}`).value,
+    year: document.getElementById(`year_${id}`).value
+  });
+
+  alert("Updated");
+  loadData();
 }
 
 // delete
