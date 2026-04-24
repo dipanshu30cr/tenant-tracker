@@ -46,7 +46,7 @@ async function addData() {
     await db.createDocument(DB_ID, COL_ID, ID.unique(), {
         flatNo: document.getElementById("flat").value,
         name: document.getElementById("name").value,
-        amount: parseInt(document.getElementById("amount").value),
+        amount: document.getElementById("amount").value,
         month: document.getElementById("month").value,
         year: document.getElementById("year").value
         });
