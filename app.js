@@ -1,7 +1,7 @@
 const { Client, Databases, ID, Query } = Appwrite;
 
 const client = new Client()
-  .setEndpoint('https://cloud.appwrite.io/v1')
+  .setEndpoint('https://nyc.cloud.appwrite.io/v1')
   .setProject('69ebaa44001029b8e4a3');
 
 const db = new Databases(client);
@@ -11,11 +11,11 @@ const COL_ID = "payments";
 
 // VALIDATION FUNCTION
 function validate() {
-  const flatVal = flat.value.trim();
-  const nameVal = name.value.trim();
-  const amountVal = amount.value.trim();
-  const monthVal = month.value.trim();
-  const yearVal = year.value.trim();
+  const flatVal = document.getElementById("flat").value.trim();
+  const nameVal = document.getElementById("name").value.trim();
+  const amountVal = document.getElementById("amount").value.trim();
+  const monthVal = document.getElementById("month").value.trim();
+  const yearVal = document.getElementById("year").value.trim();
 
   if (!flatVal || !nameVal || !amountVal || !monthVal || !yearVal) {
     return "All fields are required";
@@ -27,14 +27,6 @@ function validate() {
 
   if (!/^[0-9]+$/.test(yearVal)) {
     return "Year must be numeric";
-  }
-
-  if (yearVal.length !== 4) {
-    return "Year must be 4 digits";
-  }
-
-  if (amountVal <= 0) {
-    return "Amount must be greater than 0";
   }
 
   return "";
@@ -52,12 +44,12 @@ async function addData() {
 
   try {
     await db.createDocument(DB_ID, COL_ID, ID.unique(), {
-      flatNo: flat.value,
-      name: name.value,
-      amount: parseInt(amount.value),
-      month: month.value,
-      year: year.value
-    });
+        flatNo: document.getElementById("flat").value,
+        name: document.getElementById("name").value,
+        amount: parseInt(document.getElementById("amount").value),
+        month: document.getElementById("month").value,
+        year: document.getElementById("year").value
+        });
 
     alert("✅ Added successfully");
 
